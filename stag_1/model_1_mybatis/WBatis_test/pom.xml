@@ -8,5 +8,11 @@
     <artifactId>WBatis_test</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.whitley</groupId>
+            <artifactId>WBatis</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>
