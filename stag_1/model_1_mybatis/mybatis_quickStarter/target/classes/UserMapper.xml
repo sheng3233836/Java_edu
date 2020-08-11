@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mysql.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="user">
+<mapper namespace="com.whitley.dao.UserDao">
+    <!-- namespace + id 组成唯一标识 -->
     <select id="findAll" resultType="com.whitley.pojo.User">
         select * from user
     </select>

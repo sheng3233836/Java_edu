@@ -1,3 +1,4 @@
+import com.whitley.dao.UserDao;
 import com.whitley.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -55,6 +56,19 @@ public class MybatisTest {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         sqlSession.insert("user.del", 2);
         sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void test5() throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        List<User> users = userDao.findAll();
+        for (User user : users) {
+            System.out.println(user);
+        }
         sqlSession.close();
     }
 }
