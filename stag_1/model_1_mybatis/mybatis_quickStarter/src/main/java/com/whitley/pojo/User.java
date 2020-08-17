@@ -1,9 +1,13 @@
 package com.whitley.pojo;
 
 
+import java.util.List;
+
 public class User {
     private int id;
     private String username;
+
+    private List<Product> products;
 
 
     public int getId() {
@@ -27,6 +31,15 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", products=" + products +
                 '}';
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

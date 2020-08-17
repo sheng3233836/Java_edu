@@ -65,10 +65,10 @@ public class MybatisTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UserDao userDao = sqlSession.getMapper(UserDao.class);
-        List<User> users = userDao.findAll();
-        for (User user : users) {
-            System.out.println(user);
-        }
+//        List<User> users = userDao.findAll();
+//        for (User user : users) {
+//            System.out.println(user);
+//        }
         sqlSession.close();
     }
 }

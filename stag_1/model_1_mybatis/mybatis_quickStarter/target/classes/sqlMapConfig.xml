@@ -16,7 +16,8 @@
         </environment>
     </environments>
     <mappers>
+        <package name="com.whitley.dao"/>
         <!-- resource:指向xml, class:指向java class -->
-        <mapper resource="UserMapper.xml"></mapper>
+<!--        <mapper resource="UserMapper.xml"></mapper>-->
     </mappers>
 </configuration>
