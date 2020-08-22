@@ -1,9 +1,11 @@
-import com.whitley.dao.UserDao;
+import com.whitley.dao.UserMapper;
 import com.whitley.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -64,11 +66,54 @@ public class MybatisTest {
         InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        UserDao userDao = sqlSession.getMapper(UserDao.class);
-        List<User> users = userDao.findAll();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        List<User> users = userMapper.findAll();
         for (User user : users) {
             System.out.println(user);
         }
         sqlSession.close();
+    }
+
+    @Test
+    public void test6() throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        List<User> users = userMapper.findByIds(new int[]{1,2});
+        for (User user : users) {
+            System.out.println(user);
+        }
+        sqlSession.close();
+    }
+    private SqlSession sqlSession;
+    @Before
+    public void Before() throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
+        sqlSession = sqlSessionFactory.openSession(true);
+    }
+
+    @After
+    public void After() throws IOException {
+        sqlSession.close();
+    }
+
+    @Test
+    public void test10() {
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        List<User> users = userMapper.findUser();
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void test11() {
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setId(4);
+        user.setUsername("save");
+        userMapper.addUser(user);
     }
 }

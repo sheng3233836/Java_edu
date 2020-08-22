@@ -3,6 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+    <properties resource="jdbc.properties"/>
+
+    <typeAliases>
+        <!-- 给单个实体起别名-->
+<!--        <typeAlias type="com.whitley.pojo.User" alias="User"></typeAlias>-->
+        <!--批量给包内起别名，用Class名字就好，而且不区分大小写-->
+        <package name="com.whitley.pojo"/>
+    </typeAliases>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"></transactionManager>
@@ -16,7 +25,7 @@
         </environment>
     </environments>
     <mappers>
-        <!-- resource:指向xml, class:指向java class -->
-        <mapper resource="UserMapper.xml"></mapper>
+        <package name="com.whitley.dao"/>
+        <!-- resource:指向xml, class:指向java class 用于注解sql方式 -->
     </mappers>
 </configuration>
