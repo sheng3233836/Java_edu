@@ -9,6 +9,8 @@ public class User {
 
     private List<Order> orderList;
     private List<Role> roleList;
+    private List<Product> products;
+
 
     public int getId() {
         return id;
@@ -49,6 +51,15 @@ public class User {
                 ", username='" + username + '\'' +
                 ", orderList=" + orderList +
                 ", roleList=" + roleList +
+                ", products=" + products +
                 '}';
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

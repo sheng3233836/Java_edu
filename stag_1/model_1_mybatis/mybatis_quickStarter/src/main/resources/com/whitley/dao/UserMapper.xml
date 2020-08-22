@@ -37,4 +37,5 @@
     <delete id="del" parameterType="java.lang.Integer">
         delete from user where id = #{id}
     </delete>
+
 </mapper>

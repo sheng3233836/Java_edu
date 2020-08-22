@@ -27,5 +27,7 @@
     <mappers>
         <package name="com.whitley.dao"/>
         <!-- resource:指向xml, class:指向java class 用于注解sql方式 -->
+        <!-- resource:指向xml, class:指向java class -->
+<!--        <mapper resource="UserMapper.xml"></mapper>-->
     </mappers>
 </configuration>
