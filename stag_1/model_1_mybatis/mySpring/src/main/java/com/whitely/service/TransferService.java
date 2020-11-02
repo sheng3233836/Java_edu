@@ -5,4 +5,5 @@ package com.whitely.service;
  * @date 2020-10-26
  */
 public interface TransferService {
+    void getName();
 }
