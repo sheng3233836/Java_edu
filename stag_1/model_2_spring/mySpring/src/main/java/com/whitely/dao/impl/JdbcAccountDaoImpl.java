@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import com.whitely.beans.Account;
 import com.whitely.dao.AccountDao;
 import com.whitely.utils.ConnectionUtils;
+import com.whitely.utils.DruidUtils;
 
 /**
  * @author yuanxin
@@ -48,7 +49,7 @@ public class JdbcAccountDaoImpl implements AccountDao {
 
         resultSet.close();
         preparedStatement.close();
-        //con.close();
+//        connection.close();
 
         return account;
     }

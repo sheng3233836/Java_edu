@@ -15,10 +15,14 @@ public class DruidUtils {
 
 
     static {
-        druidDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        druidDataSource.setUrl("jdbc:mysql://localhost:3306/self_test");
-        druidDataSource.setUsername("root");
-        druidDataSource.setPassword("root");
+        try {
+            druidDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+            druidDataSource.setUrl("jdbc:mysql://localhost:3306/self_test");
+            druidDataSource.setUsername("root");
+            druidDataSource.setPassword("root");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static DruidDataSource getInstance() {

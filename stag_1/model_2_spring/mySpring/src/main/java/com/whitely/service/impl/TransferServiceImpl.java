@@ -35,15 +35,18 @@ public class TransferServiceImpl implements TransferService {
             TransactionManager.beginTransaction();
             Account account1 = accountDao.getAccount("zhangsan");
             Account account2 = accountDao.getAccount("lisi");
-
+            System.out.println(account1.getCardNo());
+            System.out.println(account2.getCardNo());
             int trans = 100;
             account1.setMoney(account1.getMoney() + trans);
-            account1.setMoney(account1.getMoney() - trans);
+            account2.setMoney(account2.getMoney() - trans);
 
             accountDao.update(account1.getCardNo(), account1.getMoney());
+            int i = 1/0;
             accountDao.update(account2.getCardNo(), account2.getMoney());
             TransactionManager.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             TransactionManager.rollback();
         }
     }
