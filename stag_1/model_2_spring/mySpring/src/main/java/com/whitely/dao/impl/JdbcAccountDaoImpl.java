@@ -20,9 +20,11 @@ public class JdbcAccountDaoImpl implements AccountDao {
         System.out.println("this is jdbc");
     }
 
+    private ConnectionUtils connectionUtils;
+
     @Override
     public int update(String cardNo, int money) throws SQLException {
-        Connection connection = ConnectionUtils.getInstance().getCurrentConnection();
+        Connection connection = connectionUtils.getCurrentConnection();
         String sql = "update account set money=? where cardNo=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1,money);
@@ -35,7 +37,7 @@ public class JdbcAccountDaoImpl implements AccountDao {
 
     @Override
     public Account getAccount(String cardNo) throws SQLException {
-        Connection connection = ConnectionUtils.getInstance().getCurrentConnection();
+        Connection connection = connectionUtils.getCurrentConnection();
         String sql = "select * from account where cardNo=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1,cardNo);
@@ -52,5 +54,9 @@ public class JdbcAccountDaoImpl implements AccountDao {
 //        connection.close();
 
         return account;
+    }
+
+    public void setConnectionUtils(ConnectionUtils connectionUtils) {
+        this.connectionUtils = connectionUtils;
     }
 }

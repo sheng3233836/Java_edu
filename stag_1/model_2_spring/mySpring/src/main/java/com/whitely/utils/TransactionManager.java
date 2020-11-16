@@ -7,16 +7,21 @@ import java.sql.SQLException;
  * @date 2020-11-05
  */
 public class TransactionManager {
+    private ConnectionUtils connectionUtils;
 
-    public static void beginTransaction() throws SQLException {
-        ConnectionUtils.getInstance().getCurrentConnection().setAutoCommit(false);
+    public void beginTransaction() throws SQLException {
+        connectionUtils.getCurrentConnection().setAutoCommit(false);
     }
 
-    public static void commit() throws SQLException {
-        ConnectionUtils.getInstance().getCurrentConnection().commit();
+    public void commit() throws SQLException {
+        connectionUtils.getCurrentConnection().commit();
     }
 
-    public static void rollback() throws SQLException {
-        ConnectionUtils.getInstance().getCurrentConnection().rollback();
+    public void rollback() throws SQLException {
+        connectionUtils.getCurrentConnection().rollback();
+    }
+
+    public void setConnectionUtils(ConnectionUtils connectionUtils) {
+        this.connectionUtils = connectionUtils;
     }
 }
