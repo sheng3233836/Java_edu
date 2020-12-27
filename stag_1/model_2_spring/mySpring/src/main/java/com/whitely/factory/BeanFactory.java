@@ -1,6 +1,7 @@
 package com.whitely.factory;
 
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -53,10 +54,19 @@ public class BeanFactory {
                 Object parentObj = map.get(id);
 
                 // 找到set+name方法
-                Method[] methods = parentObj.getClass().getMethods();
+                Class<?> aClass = parentObj.getClass();
+                Method[] methods = aClass.getMethods();
                 for (Method method : methods) {
                     if (method.getName().equals("set"+name)) {
                         method.invoke(parentObj, map.get(ref));
+                    }
+                }
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields) {
+                    if (declaredField.isAnnotationPresent(zhuru.class) && declaredField.getAnnotation(zhuru.class).required()) {
+                        System.out.println(declaredField.getName());
+                        declaredField.setAccessible(true);
+                        declaredField.set(parentObj, map.get(declaredField.getName()));
                     }
                 }
                 map.put(id, parentObj);

@@ -21,8 +21,8 @@ public class Test {
         InputStream resourceAsStream = Resources.getResourceAsStream("sqlMapConfig.xml");
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resourceAsStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        ProductDao productDao = sqlSession.getMapper(ProductDao.class);
-        List<Product> products = productDao.findProductAndUser();
+            ProductDao productDao = sqlSession.getMapper(ProductDao.class);
+            List<Product> products = productDao.findProductAndUser();
         for (Product product : products) {
             System.out.println(product);
         }
