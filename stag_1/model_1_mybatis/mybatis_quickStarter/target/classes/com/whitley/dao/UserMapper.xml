@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mysql.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.whitley.dao.UserMapper">
+    <!-- namespace + id 组成唯一标识 -->
+    <select id="findAll" resultType="com.whitley.pojo.User">
+        select * from user
+    </select>
+
+    <select id="findById" parameterType="com.whitley.pojo.User" resultType="com.whitley.pojo.User">
+        select * from user
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByIds" parameterType="list" resultType="com.whitley.pojo.User">
+        select * from user
+        <where>
+            <foreach collection="array" open="id in (" close=")" item="id" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.whitley.pojo.User">
+        insert into user values (#{id},#{username})
+    </insert>
+
+    <update id="update" parameterType="com.whitley.pojo.User">
+        update user set username = #{username} where id = #{id}
+    </update>
+
+    <delete id="del" parameterType="java.lang.Integer">
+        delete from user where id = #{id}
+    </delete>
+</mapper>
